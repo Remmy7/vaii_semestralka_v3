@@ -86,17 +86,17 @@
 
 .playGameButton {
     margin-top: 2%;
-    background-color: #5e9d07;
+    background-color: blue;
 }
 
 .loginButton {
     margin-top: 2%;
-    background-color: blueviolet;
+    background-color: cornflowerblue;
 }
 
 .registerButton {
     margin-top: 2%;
-    background-color: darkolivegreen;
+    background-color: cornflowerblue;
 }
 div#pozadieHlavnaStranka {
     background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");

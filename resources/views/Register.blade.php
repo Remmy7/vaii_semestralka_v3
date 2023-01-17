@@ -33,7 +33,7 @@
             </div>
             <div class="mb-1">
                 <label for="passwordStrength" class="form-label">Password</label>
-                <input type="password" class="form-control" name="inputPassword" required minlength="6">
+                <input type="password" class="form-control" id="passwordStrength" name="inputPassword" required minlength="6">
             </div>
             <div class="mb-1">
                 <label for="repeatPassword" class="form-label" >Repeat password</label>
@@ -43,7 +43,7 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="email@gmail.com" name="inputEmail">
             </div>
-            <button class="btn btn-primary"></button>
+            <button class="btn btn-primary">Register</button>
         </div>
     </form>
 

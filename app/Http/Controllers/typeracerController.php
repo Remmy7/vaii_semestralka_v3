@@ -89,6 +89,21 @@ class typeracerController extends Controller
         return back();
     }
 
+    public function updateCategory(Request $request) {
+        $category = categories::find($request->category_id_update);
+        $category->categoryTitle = $request->updateCategory;
+        $category->save();
+        return back();
+    }
+
+    public function updateDifficulty(Request $request) {
+
+        $difficulty = difficulty::find($request->difficulty_id_update);
+        $difficulty->difficulty = $request->updateDifficulty;
+        $difficulty->save();
+        return back();
+    }
+
     public function loginUser(Request $request) {
         /*\Log::info(json_encode($request->all()));
         $userData = array(
@@ -135,6 +150,8 @@ class typeracerController extends Controller
             session()->pull('privilege');
             return redirect('/');
         }
+        session()->pull('privilege');
+        return redirect('/');
     }
 
     public function viewRegister() {
@@ -178,12 +195,17 @@ class typeracerController extends Controller
     }
 
     public function viewSettings() {
-        return view('Settings');
+        $userId = session()->get('LoggedUser') ;
+
+        $userData = users::find($userId);
+        return view('Settings',['userData' => $userData]);
     }
 
     public function viewLeaderboard() {
         return view('Leaderboard');
     }
+
+
 
 
 

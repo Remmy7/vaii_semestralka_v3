@@ -31,6 +31,15 @@
                 </form>
             </div>
         </div>
+        <div class="row g-2 adminMenu" style="margin-top: 5%; width:100%" >
+            <div class="row">
+                <p id="textMainPage">Logged session data:</p>
+            </div>
+            <div class="row">
+                <p>Name: </p>
+        </div>
+
+    </div>
     </div>
     <footer class="row fixed-bottom" >
         <p>Author: Tibor Michalov <a href="mailto:michalov1@stud.uniza.sk">michalov1@stud.uniza.sk</a></p>

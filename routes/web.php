@@ -70,6 +70,9 @@ Route::delete('/categories', [typeracerController::class, 'deleteCategory'])->na
 
 Route::delete('/difficulties', [typeracerController::class, 'deleteDifficulty'])->name('deleteDifficulty');
 
+Route::post('/updateCategory', [typeracerController::class, 'updateCategory'])->name('updateCategory');
+
+Route::post('/updateDifficulty', [typeracerController::class, 'updateDifficulty'])->name('updateDifficulty');
 
 
 

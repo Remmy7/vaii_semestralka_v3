@@ -37,7 +37,7 @@
                 <div class="row g-2">
                     <div class="col-6 col-md-3 text-center">
                         <select name="category_id" id="category" class="category">
-                            <option disable selected>--select category--</option>
+                            <option disabled selected>--select category--</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->categoryTitle }}</option>
                             @endforeach
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-6 col-md-3 text-center">
                         <select name="difficulty_id" id="difficulty" class="difficulty">
-                            <option disable selected>--select difficulties--</option>
+                            <option disabled selected>--select difficulties--</option>
                             @foreach($difficulties as $difficulty)
                                 <option value="{{ $difficulty->id }}">{{ $difficulty->difficulty }}</option>
                             @endforeach
@@ -57,7 +57,7 @@
                 </div>
             </form>
             <select name="text_id" id="texts" class="texts" style="width:50%">
-                <option disable selected>--search texts--</option>
+                <option disabled selected>--search texts--</option>
                 @foreach($texts as $text)
                     <option value="{{ $text->id }}" style="white-space: nowrap; overflow: hidden ;text-overflow: ellipsis; width: 20%;" >{{ $text->gameText }}</option>
                 @endforeach
@@ -77,18 +77,46 @@
                         <button>save difficulty</button>
                     </form>
                 </div>
+                <div class="col-6 col-md-3 text-center">
+                    <form method="post" action="{{ route('updateCategory')}}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <textarea name="updateCategory" class="textAreaForAdminInput" placeholder="Update category"></textarea>
+                        <select name="category_id_update" data-id="categoryUpdate" class="categoryUpdate">
+                            <option disabled selected>--select category--</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" data-id="{{$category->id}}">{{ $category->categoryTitle }}</option>
+                            @endforeach
+                        </select>
+                        <button class="categoryUpdateButton" id="update_category" data-id="{{ $category->id }}">update category</button>
+                    </form>
+                </div>
+
+                <div class="col-6 col-md-3 text-center">
+                    <form method="post" action="{{ route('updateDifficulty')}}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <textarea name="updateDifficulty" class="textAreaForAdminInput" placeholder="Update difficulty"></textarea>
+                        <select name="difficulty_id_update" data-id2="difficultyUpdate" class="difficultyUpdate">
+                            <option disabled selected>--select difficulties--</option>
+                            @foreach($difficulties as $difficulty)
+                                <option value="{{ $difficulty->id }}" data-id2="{{$difficulty->id}}">{{ $difficulty->difficulty }}</option>
+                            @endforeach
+                        </select>
+                        <button class="updateDifficultyButton" id="update_difficulty" data-id2="{{ $difficulty->id }}">update difficulty</button>
+                    </form>
+                </div>
             </div>
+
+
             <div class="row g-2">
                 <div class="col-6 col-md-3 text-center">
                     <form method="post" action="{{ route('deleteCategory')}}" accept-charset="UTF-8">
                         {{ csrf_field() }}
                         <select name="category_id_delete" data-id="categoryDelete" class="categoryDelete">
-                            <option disable selected>--select category--</option>
+                            <option disabled selected>--select category--</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" data-id="{{$category->id}}">{{ $category->categoryTitle }}</option>
                             @endforeach
                         </select>
-                        <input type="hidden" name="_method" value="delete"/>
                         <button class="categoryDeleteButton" id="delete_category" data-id="{{ $category->id }}">delete category</button>
                     </form>
                 </div>
@@ -97,15 +125,16 @@
                     <form method="post" action="{{ route('deleteDifficulty')}}" accept-charset="UTF-8">
                         {{ csrf_field() }}
                         <select name="difficulty_id_delete" data-id2="difficultyDelete" class="difficultyDelete">
-                            <option disable selected>--select difficulties--</option>
+                            <option disabled selected>--select difficulties--</option>
                             @foreach($difficulties as $difficulty)
                                 <option value="{{ $difficulty->id }}" data-id2="{{$difficulty->id}}">{{ $difficulty->difficulty }}</option>
                             @endforeach
                         </select>
-                        <input type="hidden" name="_method" value="delete"/>
                         <button class="deleteDifficultyButton" id="delete_difficulty" data-id2="{{ $difficulty->id }}">deleteDifficulty</button>
                     </form>
                 </div>
+
+
             </div>
         </div>
     </div>
