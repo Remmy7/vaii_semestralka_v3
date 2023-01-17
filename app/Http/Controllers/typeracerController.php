@@ -79,14 +79,13 @@ class typeracerController extends Controller
         return view('Login');
     }
 
-    public function deleteDifficulty($id) {
-        difficulty::find($id)->delete($id);
+    public function deleteDifficulty(Request $request) {
+        difficulty::find($request->difficulty_id_delete)->delete($request->difficulty_id_delete);
         return back();
-
     }
 
-    public function deleteCategory($id) {
-        categories::find($id)->delete($id);
+    public function deleteCategory(Request $request) {
+        categories::find($request->category_id_delete)->delete($request->category_id_delete);
         return back();
     }
 
@@ -185,27 +184,6 @@ class typeracerController extends Controller
     public function viewLeaderboard() {
         return view('Leaderboard');
     }
-
-
-    public function saveItem(Request $request) {
-        \Log::info(json_encode($request->all()));
-
-        $newListItem = new ListItem;
-        $newListItem->name = $request->listItem;
-        $newListItem->is_complete = 0;
-        $newListItem->save();
-        return redirect('/');
-    }
-
-    public function markComplete($id) {
-        \Log::info($id);
-        $listItem = ListItem::find($id);
-        $listItem->is_complete = 1;
-        $listItem->save();
-        \Log::info($listItem);
-        return redirect('/');
-    }
-
 
 
 

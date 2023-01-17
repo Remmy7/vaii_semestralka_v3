@@ -17,6 +17,7 @@
 
 
 
+
 </head>
 <body>
 <div id="pozadieHlavnaStranka" class="backgroundDefaultFullscreen">
@@ -55,65 +56,56 @@
                     <button>save article</button>
                 </div>
             </form>
-            <select name="text_id" id="texts" class="texts">
+            <select name="text_id" id="texts" class="texts" style="width:50%">
                 <option disable selected>--search texts--</option>
                 @foreach($texts as $text)
-                    <option value="{{ $text->id }}">{{ $text->gameText }}</option>
+                    <option value="{{ $text->id }}" style="white-space: nowrap; overflow: hidden ;text-overflow: ellipsis; width: 20%;" >{{ $text->gameText }}</option>
                 @endforeach
             </select>
             <div class="row g-2">
                 <div class="col-6 col-md-3 text-center">
                     <form method="post" action="{{ route('addCategory') }}" accept-charset="UTF-8">
                         {{ csrf_field() }}
-                        <textarea name="addCategory" class="textAreaForAdminInput"></textarea>
+                        <textarea name="addCategory" class="textAreaForAdminInput" placeholder="Create category"></textarea>
                         <button>save category</button>
                     </form>
                 </div>
                 <div class="col-6 col-md-3 text-center">
                     <form method="post" action="{{ route('addDifficulty') }}" accept-charset="UTF-8">
                         {{ csrf_field() }}
-                        <textarea name="addDifficulty" class="textAreaForAdminInput"></textarea>
+                        <textarea name="addDifficulty" class="textAreaForAdminInput" placeholder="Create difficulty"></textarea>
                         <button>save difficulty</button>
                     </form>
                 </div>
             </div>
             <div class="row g-2">
                 <div class="col-6 col-md-3 text-center">
-
-                        <select name="category_id_delete" data-id2="categoryDelete" class="categoryDelete">
+                    <form method="post" action="{{ route('deleteCategory')}}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <select name="category_id_delete" data-id="categoryDelete" class="categoryDelete">
                             <option disable selected>--select category--</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->categoryTitle }}</option>
+                                <option value="{{ $category->id }}" data-id="{{$category->id}}">{{ $category->categoryTitle }}</option>
                             @endforeach
                         </select>
-                        <button>delete category</button>
-
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button class="categoryDeleteButton" id="delete_category" data-id="{{ $category->id }}">delete category</button>
+                    </form>
                 </div>
-                <div class="col-6 col-md-3 text-center">
 
+                <div class="col-6 col-md-3 text-center">
+                    <form method="post" action="{{ route('deleteDifficulty')}}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
                         <select name="difficulty_id_delete" data-id2="difficultyDelete" class="difficultyDelete">
                             <option disable selected>--select difficulties--</option>
                             @foreach($difficulties as $difficulty)
-                                <option value="{{ $difficulty->id }}" data-id2="'.$difficulty->id.'">{{ $difficulty->difficulty }}</option>
+                                <option value="{{ $difficulty->id }}" data-id2="{{$difficulty->id}}">{{ $difficulty->difficulty }}</option>
                             @endforeach
                         </select>
-                        <button class="deleteDifficultyButton" id="delete_difficulty">deleteDifficulty</button>
-
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button class="deleteDifficultyButton" id="delete_difficulty" data-id2="{{ $difficulty->id }}">deleteDifficulty</button>
+                    </form>
                 </div>
-                <script type="text/javascript">
-                    $('body').on('click','.deleteDifficultyButton', function(){
-                        var id = $(this).data("id");
-                        $.ajax({
-                            url: "{{ route('deleteDifficulty') }}"+ '/' + id,
-                            type: 'DELETE',
-                            success: function(result){
-                                console.log(result)
-                            }
-                        });
-                    });
-                </script>
-
-
             </div>
         </div>
     </div>
