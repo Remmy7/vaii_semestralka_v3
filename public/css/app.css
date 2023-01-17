@@ -1,0 +1,218 @@
+@media (min-width: 544px) {
+    #textAreaForTyperacer {
+        font-size: 20px;
+    }
+    #textAreaForArticle {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    #textAreaForTyperacer {
+        font-size: 25px;
+    }
+    #textAreaForArticle {
+        font-size: 25px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    #textAreaForTyperacer {
+        font-size: 30px;
+    }
+    #textAreaForArticle {
+        font-size: 30px;
+    }
+}
+@media (min-width:1200px) {
+    #textAreaForTyperacer {
+        font-size: 45px;
+    }
+    #textAreaForArticle {
+        font-size: 45px;
+    }
+}
+.gameTimer {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-size: 30px;
+    color: lightsalmon;
+}
+.background_game {
+    font-size: 20px;
+    padding: 20px;
+    background-color: greenyellow;
+}
+
+.adminMenu {
+    font-size: 20px;
+    padding: 20px;
+    background-color: orange;
+}
+.textAreaForArticle {
+    background-color: #6076da;
+}
+.textAreaForTyperacer {
+    width: 100%;
+    height: 8rem;
+    resize: none;
+    margin-top: 5%;
+}
+
+.textAreaForAdminInput {
+    resize: none;
+    margin-top: 5%;
+    width: 100%
+}
+
+.backgroundDefaultFullscreen {
+    width: 100%;
+    height: 100vh;
+}
+.mainPageText {
+    margin-top: 2%;
+}
+
+.adminMenuButton {
+    margin-top: 2%;
+    background-color: darkred;
+}
+
+.settingsMenuButton {
+    margin-top: 2%;
+    background-color: grey;
+}
+
+.playGameButton {
+    margin-top: 2%;
+    background-color: #5e9d07;
+}
+
+.loginButton {
+    margin-top: 2%;
+    background-color: blueviolet;
+}
+
+.registerButton {
+    margin-top: 2%;
+    background-color: darkolivegreen;
+}
+div#pozadieHlavnaStranka {
+    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+div#pozadieLogin {
+    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div#pozadieLeaderboard {
+    background: url("https://img.freepik.com/free-photo/close-up-spiral-notepad-coffee-cup-earphone-keyboard-gray-background_23-2148052615.jpg?size=626&ext=jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+div#pozadieForums {
+    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+div#pozadieRegister {
+    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+div#pozadieSettings {
+    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.center-page {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.center-page-game {
+    padding-left: 25%;
+    padding-right: 25%;
+    margin: auto;
+}
+.col-centered {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+.strength {
+    width: 20%;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    bottom: 5px;
+}
+.mb-1 {
+    color: #ffffff;
+    font-weight: bold;
+}
+.mb-3 {
+    color: #ffffff;
+    font-weight: bold;
+}
+.mb-5 {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+th:first-child {
+    color:red;
+}
+tbody tr:first-child {
+    background-color: gold;
+}
+tbody tr:nth-child(2) {
+    background-color: silver;
+}
+tbody tr:nth-child(3) {
+    background-color: #cd7f32;
+}
+
+#textMainPage {
+    font-weight: bold;
+    color: #050100;
+    font-size: 30px;
+    background: lightblue;
+    opacity: 0.9;
+}
+.content {
+    min-height: 100%;
+    padding-bottom: 100px;
+}
+footer {
+    background: lightblue;
+    position: relative;
+    width: 100%;
+    font-size: 15px;
+}
+
+.table-fixed {
+    height: 70%;
+    overflow: scroll;
+}
+
+.correctLetter {
+    color: chartreuse;
+}
+
+.incorrectLetter {
+    color: darkred;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
