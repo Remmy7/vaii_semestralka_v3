@@ -32,6 +32,12 @@
                     <p id="textMainPage" >Lets play a game of typeracer! Press play to get going.</p>
                 </div>
             </div>
+            <div class="col-6 col-md-3 text-center">
+                <form method="post" action="{{ route('viewGame') }}" accept-charset="UTF-8">
+                    {{ csrf_field() }}
+                    <button class="btn btn-primary w-100 playGameButton">Play</button>
+                </form>
+            </div>
         @else
             <div class="row g-2">
                 <div class="col-6 col-md-3 text-center">
@@ -52,13 +58,8 @@
                     <p id="textMainPage" >Lets play a game of typeracer! Login to continue.</p>
                 </div>
             </div>
+
         @endif
-        <div class="col-6 col-md-3 text-center">
-            <form method="post" action="{{ route('viewGame') }}" accept-charset="UTF-8">
-                {{ csrf_field() }}
-                <button class="btn btn-primary w-100 playGameButton">Play</button>
-            </form>
-        </div>
         @if(session('privilege') == 4)
             <div class="col-6 col-md-3 text-center">
                 <form method="post" action="{{ route('viewAdminMenu') }}" accept-charset="UTF-8">

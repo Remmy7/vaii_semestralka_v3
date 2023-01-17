@@ -79,6 +79,17 @@ class typeracerController extends Controller
         return view('Login');
     }
 
+    public function deleteDifficulty($id) {
+        difficulty::find($id)->delete($id);
+        return back();
+
+    }
+
+    public function deleteCategory($id) {
+        categories::find($id)->delete($id);
+        return back();
+    }
+
     public function loginUser(Request $request) {
         /*\Log::info(json_encode($request->all()));
         $userData = array(

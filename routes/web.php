@@ -66,7 +66,9 @@ Route::post('/saveItem', [typeracerController::class, 'saveItem'])->name('saveIt
 
 Route::post('/markCompleteRoute/{id}', [typeracerController::class, 'markComplete'])->name('markComplete');
 
+Route::delete('/categories/{id}', [typeracerController::class, 'deleteCategory']);
 
+Route::delete('/difficulties/{id}', [typeracerController::class, 'deleteDifficulty'])->name('deleteDifficulty');
 
 
 

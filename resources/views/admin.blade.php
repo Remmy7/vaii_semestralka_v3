@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" >
     <script src="{{ asset('/app.js')}}" defer></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 
 </head>
@@ -52,7 +55,7 @@
                     <button>save article</button>
                 </div>
             </form>
-            <select name="text_id" id="texts" class="texts"></select>
+            <select name="text_id" id="texts" class="texts">
                 <option disable selected>--search texts--</option>
                 @foreach($texts as $text)
                     <option value="{{ $text->id }}">{{ $text->gameText }}</option>
@@ -73,6 +76,44 @@
                         <button>save difficulty</button>
                     </form>
                 </div>
+            </div>
+            <div class="row g-2">
+                <div class="col-6 col-md-3 text-center">
+
+                        <select name="category_id_delete" data-id2="categoryDelete" class="categoryDelete">
+                            <option disable selected>--select category--</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->categoryTitle }}</option>
+                            @endforeach
+                        </select>
+                        <button>delete category</button>
+
+                </div>
+                <div class="col-6 col-md-3 text-center">
+
+                        <select name="difficulty_id_delete" data-id2="difficultyDelete" class="difficultyDelete">
+                            <option disable selected>--select difficulties--</option>
+                            @foreach($difficulties as $difficulty)
+                                <option value="{{ $difficulty->id }}" data-id2="'.$difficulty->id.'">{{ $difficulty->difficulty }}</option>
+                            @endforeach
+                        </select>
+                        <button class="deleteDifficultyButton" id="delete_difficulty">deleteDifficulty</button>
+
+                </div>
+                <script type="text/javascript">
+                    $('body').on('click','.deleteDifficultyButton', function(){
+                        var id = $(this).data("id");
+                        $.ajax({
+                            url: "{{ route('deleteDifficulty') }}"+ '/' + id,
+                            type: 'DELETE',
+                            success: function(result){
+                                console.log(result)
+                            }
+                        });
+                    });
+                </script>
+
+
             </div>
         </div>
     </div>
