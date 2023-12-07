@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\users;
 use App\Models\categories;
 use App\Models\difficulty;
@@ -9,8 +10,8 @@ use App\Models\game_texts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Auth;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 
 class typeracerController extends Controller
@@ -42,6 +43,16 @@ class typeracerController extends Controller
 
     public function addText(Request $request) {
         \Log::info(json_encode($request->all()));
+
+        //categoriesID and difficultiesID will not be null thanks to javascript
+        //now you just need to check if they are in the database
+
+        $request->validate([
+            'addText' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'difficulty_id' => 'required|exists:difficulties,id',
+        ]);
+
 
         $newArticle = new game_texts();
         $newArticle->gameText = $request->input('addText');
@@ -80,12 +91,32 @@ class typeracerController extends Controller
     }
 
     public function deleteDifficulty(Request $request) {
+        $request->validate([
+            'difficulty_id_delete' => 'required|exists_in_difficulties:'.$request->input('difficulty_id_delete') //TODO - add check if text matches ID
+        ], [
+            'difficulty_id_delete.exists_in_difficulties' => 'Difficulty ID does not exist',
+        ]);
         difficulty::find($request->difficulty_id_delete)->delete($request->difficulty_id_delete);
-        return back();
+        return redirect('/viewAdminMenu');
     }
 
     public function deleteCategory(Request $request) {
+        $request->validate([
+            'category_id_delete' => 'required|exists_in_categories:'.$request->input('category_id_delete') //TODO - add check if text matches ID
+        ], [
+            'category_id_delete.exists_in_categories' => 'Category ID does not exist',
+        ]);
         categories::find($request->category_id_delete)->delete($request->category_id_delete);
+        return back();
+    }
+
+    public function deleteText(Request $request) {
+        $request->validate([
+            'text_id' => 'required|exists_in_game_texts:'.$request->input('text_id') //TODO - add check if text matches ID
+        ], [
+            'text_id.exists_in_game_texts' => 'Article ID does not exist',
+        ]);
+        game_texts::find($request->text_id)->delete($request->text_id);
         return back();
     }
 
@@ -113,7 +144,7 @@ class typeracerController extends Controller
         );
 
          if (Auth::attempt([
-             'nickname' => $login,
+             'name' => $login,
              'password' => $password]
          )) {
             return redirect('/');
@@ -127,8 +158,8 @@ class typeracerController extends Controller
             'inputUsername' => 'required',
             'inputPassword' => 'required|min:6'
         ]);
-        $userData = DB::table('users')->where('nickname', $request->inputUsername)->first();
-        //$userData = users::where('nickname','=', $request->inputUsername);
+        $userData = DB::table('users')->where('name', $request->inputUsername)->first();
+        //$userData = users::where('name','=', $request->inputUsername);
         \Log::info(json_encode($userData));
         if ($userData) {
             //\Log::info(json_encode($request->input('inputPassword')));
@@ -169,8 +200,8 @@ class typeracerController extends Controller
             ]);
 
 
-            $newUser = new users();
-            $newUser->nickname = $request->input('inputUsername');
+            $newUser = new User();
+            $newUser->name = $request->input('inputUsername');
             $newUser->password = Hash::make($request->input('inputPassword'));
             $newUser->email = $request->input('inputEmail');
             $newUser->privilege = 1;
@@ -182,13 +213,15 @@ class typeracerController extends Controller
     }
 
     public function deleteUser(Request $request) {
-
-        $user = $request->session()->get('LoggedUser');
-        session()->pull('LoggedUser');
-        session()->pull('privilege');
-
+        try {
+            $user = $request->session()->get('LoggedUser');
+            User::destroy($user);
+            session()->pull('LoggedUser');
+            session()->pull('privilege');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
         return redirect('/');
-
     }
     public function viewForums() {
         return view('Forums');
@@ -197,7 +230,7 @@ class typeracerController extends Controller
     public function viewSettings() {
         $userId = session()->get('LoggedUser') ;
 
-        $userData = users::find($userId);
+        $userData = User::find($userId);
         return view('Settings',['userData' => $userData]);
     }
 

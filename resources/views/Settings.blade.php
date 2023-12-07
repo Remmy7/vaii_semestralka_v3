@@ -37,10 +37,18 @@
             </div>
             <div class="row">
                 <p>Name: </p>
+             </div>
         </div>
+        <div class="row g-2">
+            <div class="col-6 col-md-3 text-center" style="margin-top: 5%">
+                <form method="post" action="{{ route('deleteUser') }}" accept-charset="UTF-8">
+                    {{ csrf_field() }}
+                    <button class="btn btn-warning w-100">delete user</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    </div>
-    </div>
     <footer class="row fixed-bottom" >
         <p>Author: Tibor Michalov <a href="mailto:michalov1@stud.uniza.sk">michalov1@stud.uniza.sk</a></p>
         <!--<p><a href="mailto:michalov1@stud.uniza.sk">michalov1@stud.uniza.sk</a></p>-->

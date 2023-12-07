@@ -36,13 +36,14 @@
         <div class="background_game">
             <div class="row">
                 <div class="col-12">
-                    <div class="textAreaForArticle" id="textAreaArticle">{{$game_text}}</div>
+                    <div class="textAreaForArticle" id="textAreaArticle" style="user-select: none">{{$game_text}}</div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <textarea id="textAreaTyperacer" class="textAreaForTyperacer" placeholder="Write what you see above over here!" autofocus></textarea>
                 </div>
+                <p id="CPM">CPM: 0</p>
             </div>
         </div>
     </div>
