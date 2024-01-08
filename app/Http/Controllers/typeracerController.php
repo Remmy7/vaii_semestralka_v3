@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\leaderboard;
 use App\Models\User;
-use App\Models\users;
 use App\Models\categories;
 use App\Models\difficulty;
 use App\Models\game_texts;
@@ -13,16 +12,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use function Laravel\Prompts\password;
 
 
 class typeracerController extends Controller
 {
     public function index() {
-        return view('index');
+        $user = auth()->user();
+        return view('index', ['user'=>$user]);
     }
 
     public function viewIndex() {
-        return view('index' );
+        $user = auth()->user();
+        return view('index', ['user'=>$user]);
     }
 
     public function viewAdminMenu() {
@@ -158,21 +160,22 @@ class typeracerController extends Controller
     public function loginUser(Request $request) {
      //\Log::info(json_encode($request->all()));
 
-       /*$request->validate([
+        $request->validate([
             'inputUsername' => 'required',
             'inputPassword' => 'required|min:6'
         ]);
-        $credentials = $request->only('inputUsername', 'inputPassword');
-        if (Auth::attempt($credentials)) {
+        $username = $request->inputUsername;
+        $password = $request->inputPassword;
+
+        if (Auth::attempt(['name' => $username, 'password' => $password])) {
             // Authentication passed
             $user = Auth::user();
-            $request->session()->put('LoggedUser', $user->id);
-            $request->session()->put('privilege', $user->privilege);
+
             return redirect('/');
         } else {
             // Authentication failed
             return back()->with('fail', 'Invalid username or password.');
-        }*/
+        }/*
         $userData = DB::table('users')->where('name', $request->inputUsername)->first();
         //$userData = users::where('name','=', $request->inputUsername);
         \Log::info(json_encode($userData));
@@ -187,16 +190,14 @@ class typeracerController extends Controller
             }
         } else {
             return back()->with('fail','Invalid username or password.');
-        }
+        }*/
     }
 
-    function userLogout(){
-        if(session()->has('LoggedUser')) {
-            session()->pull('LoggedUser');
-            session()->pull('privilege');
+    public function userLogout(){
+        if(Auth::check()) {
+            Auth::logout();
             return redirect('/');
         }
-        session()->pull('privilege');
         return redirect('/');
     }
 

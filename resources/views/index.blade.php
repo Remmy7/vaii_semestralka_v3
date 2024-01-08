@@ -18,7 +18,7 @@
 <body>
 <div id="pozadieHlavnaStranka" class="backgroundDefaultFullscreen">
     <div class="container overflow-hidden">
-        @if(session('LoggedUser'))
+        @if(auth()->check())
             <div class="row g-2">
                 <div class="col-6 col-md-3 text-center">
                     <form method="post" action="{{ route('viewSettings') }}" accept-charset="UTF-8">
@@ -60,13 +60,15 @@
             </div>
 
         @endif
-        @if(session('privilege') == 4)
-            <div class="col-6 col-md-3 text-center">
-                <form method="post" action="{{ route('viewAdminMenu') }}" accept-charset="UTF-8">
-                    {{ csrf_field() }}
-                    <button class="btn btn-primary w-100 adminMenuButton">Admin menu</button>
-                </form>
-            </div>
+        @if(auth()->check())
+            @if($user->privilege == 4)
+                <div class="col-6 col-md-3 text-center">
+                    <form method="post" action="{{ route('viewAdminMenu') }}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <button class="btn btn-primary w-100 adminMenuButton">Admin menu</button>
+                    </form>
+                </div>
+            @endif
         @endif
 
 
