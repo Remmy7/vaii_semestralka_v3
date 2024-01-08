@@ -7,6 +7,8 @@ use App\Models\difficulty;
 use App\Models\game_texts;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,17 +32,18 @@ class AppServiceProvider extends ServiceProvider
         // Custom validation rule for category
 
         Validator::extend('exists_in_categories', function ($attribute, $value, $parameters, $validator) {
-            categories::where('id', $value)->exists();
+            return categories::where('id', $value)->exists();
         });
 
         // Custom validation rule for game_texts
         Validator::extend('exists_in_game_texts', function ($attribute, $value, $parameters, $validator) {
-            game_texts::where('id', $value)->exists();
+            return game_texts::where('id', $value)->exists();
         });
+
 
         // Custom validation rule for difficulties
         Validator::extend('exists_in_difficulties', function ($attribute, $value, $parameters, $validator) {
-            difficulty::where('id', $value)->exists();
+            return difficulty::where('id', $value)->exists();
         });
     }
 }

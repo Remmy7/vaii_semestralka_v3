@@ -1,7 +1,8 @@
-
 const currentTextDisplay = document.getElementById('textAreaArticle')
 const playerTextDisplay = document.getElementById('textAreaTyperacer')
 const gameTimer = document.getElementById('gameTimer')
+const gameTextID = document.getElementById('game_text_id');
+
 let charactersTyped = 1;
 playerTextDisplay.addEventListener('input', () => {
     const displayArray = currentTextDisplay.querySelectorAll('span')
@@ -42,7 +43,27 @@ function endGame() {
     clearInterval(gameInterval);
     getTimerTime();
     setTextGameDisplay();
+    addToLeaderboard();
     charactersTyped = 1;
+
+}
+
+function addToLeaderboard() {
+    $.ajax({
+        url: '/saveResult',
+        type: 'POST',
+        data: {
+            gameTextID: gameTextID.innerText,
+            time: gameTimer.innerText
+
+        },
+        success: function(response) {
+            console.log('Result saved successfully');
+        },
+        error: function(error) {
+            console.error('Error saving result', error);
+        }
+    });
 }
 
 async function setTextGameDisplay() {

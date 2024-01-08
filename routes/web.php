@@ -22,6 +22,8 @@ Route::post('/viewGame', [typeracerController::class, 'viewGame'])->name('viewGa
 
 Route::get('/viewGame', [typeracerController::class, 'viewGame'])->name('viewGame');
 
+Route::post('/saveGame',[typeracerController::class, 'saveGame'])->name('saveGame');
+
 Route::post('addText', [typeracerController::class, 'addText'])->name('addText');
 
 //Route::get('/addText/{category}/{difficulty}/{text}',function($category, $difficulty, $text) {

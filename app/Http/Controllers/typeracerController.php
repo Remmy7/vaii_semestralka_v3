@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\leaderboard;
 use App\Models\User;
 use App\Models\users;
 use App\Models\categories;
@@ -35,12 +36,31 @@ class typeracerController extends Controller
     }
 
     public function viewGame() {
-        $game_text = game_texts::inRandomOrder()->first()->gameText;
-        //$article = articleLibrary::find($id)->text;
-        return view('game', ['game_text' => $game_text]);
-
+        $game_text_random = game_texts::inRandomOrder()->first();
+        $game_text_id = $game_text_random->id;
+        $game_text = $game_text_random->gameText;
+        return view('game', ['game_text' => $game_text,
+            'game_text_id' => $game_text_id]);
     }
 
+    public function saveGame(Request $request) {
+
+        $request->validate([
+            'gameTextID' => 'required|exists:game_texts, id',
+            'playerID' => 'required|exists:users, id',
+            'time' => 'required',
+        ]);
+
+        $newScore = new leaderboard();
+        $newScore->gameTextID = $request->input('addText');
+        $newScore->playerID = $request->input('playerID');
+        $newScore->time = $request->input('time');
+
+
+        $newScore->save();
+
+        return response()->json(['message' => 'Result saved successfully, want to try another text?']);
+    }
     public function addText(Request $request) {
         \Log::info(json_encode($request->all()));
 
@@ -136,28 +156,23 @@ class typeracerController extends Controller
     }
 
     public function loginUser(Request $request) {
-        /*\Log::info(json_encode($request->all()));
-        $userData = array(
-            $login = $request->input('inputUsername'),
-            //$password = Hash::make($request->input('inputPassword')),
-            $password = $request->input('inputPassword')
-        );
+     //\Log::info(json_encode($request->all()));
 
-         if (Auth::attempt([
-             'name' => $login,
-             'password' => $password]
-         )) {
-            return redirect('/');
-         } else {
-            return redirect('viewLogin');
-         }*/
-
-        //\Log::info(json_encode($request->all()));
-
-        $request->validate([
+       /*$request->validate([
             'inputUsername' => 'required',
             'inputPassword' => 'required|min:6'
         ]);
+        $credentials = $request->only('inputUsername', 'inputPassword');
+        if (Auth::attempt($credentials)) {
+            // Authentication passed
+            $user = Auth::user();
+            $request->session()->put('LoggedUser', $user->id);
+            $request->session()->put('privilege', $user->privilege);
+            return redirect('/');
+        } else {
+            // Authentication failed
+            return back()->with('fail', 'Invalid username or password.');
+        }*/
         $userData = DB::table('users')->where('name', $request->inputUsername)->first();
         //$userData = users::where('name','=', $request->inputUsername);
         \Log::info(json_encode($userData));

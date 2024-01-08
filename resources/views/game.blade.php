@@ -37,6 +37,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="textAreaForArticle" id="textAreaArticle" style="user-select: none">{{$game_text}}</div>
+                    <input type="hidden" id="game_text_id" value="{{ $game_text_id }}">
                 </div>
             </div>
             <div class="row">
