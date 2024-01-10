@@ -49,11 +49,16 @@ function endGame() {
 }
 
 function addToLeaderboard() {
+    const gameTextID = document.getElementById('game_text_id').value;
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
-        url: '/saveResult',
+        url: '/saveGame',
         type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken
+        },
         data: {
-            gameTextID: gameTextID.innerText,
+            gameTextID: gameTextID,
             time: gameTimer.innerText
 
         },

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class leaderboard extends Model
 {
+    protected $table = 'leaderboard';
     protected $fillable = ['id','gameTextID', 'playerID', 'time'];
 
     public function gameText()

@@ -48,21 +48,24 @@ class typeracerController extends Controller
     public function saveGame(Request $request) {
 
         $request->validate([
-            'gameTextID' => 'required|exists:game_texts, id',
-            'playerID' => 'required|exists:users, id',
-            'time' => 'required',
+            'gameTextID' => 'required|exists:game_texts,id',
+            'time' => 'required|numeric|min:0',
         ]);
 
         $newScore = new leaderboard();
-        $newScore->gameTextID = $request->input('addText');
-        $newScore->playerID = $request->input('playerID');
-        $newScore->time = $request->input('time');
+        $newScore->gameTextID = $request->input('gameTextID');
+        //$newScore->playerID = auth()->user()->id;
+        $newScore->playerID = 2;
+        //$newScore->time = $request->input('time');
+        $newScore->time = 2;
 
 
         $newScore->save();
 
         return response()->json(['message' => 'Result saved successfully, want to try another text?']);
     }
+
+
     public function addText(Request $request) {
         \Log::info(json_encode($request->all()));
 
@@ -175,22 +178,7 @@ class typeracerController extends Controller
         } else {
             // Authentication failed
             return back()->with('fail', 'Invalid username or password.');
-        }/*
-        $userData = DB::table('users')->where('name', $request->inputUsername)->first();
-        //$userData = users::where('name','=', $request->inputUsername);
-        \Log::info(json_encode($userData));
-        if ($userData) {
-            //\Log::info(json_encode($request->input('inputPassword')));
-            if (Hash::check($request->input('inputPassword'), $userData->password)) {
-                $request->session()->put('LoggedUser', $userData->id);
-                $request->session()->put('privilege', $userData->privilege);
-                return redirect('/');
-            } else {
-                return back()->with('fail', 'Invalid username or password.');
-            }
-        } else {
-            return back()->with('fail','Invalid username or password.');
-        }*/
+        }
     }
 
     public function userLogout(){
@@ -230,13 +218,16 @@ class typeracerController extends Controller
 
     public function deleteUser(Request $request) {
         try {
-            $user = $request->session()->get('LoggedUser');
-            User::destroy($user);
-            session()->pull('LoggedUser');
+            if(Auth::check()) {
+                Auth::user()->delete();
+                Auth::logout();
+            }
+
             session()->pull('privilege');
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
+
         return redirect('/');
     }
     public function viewForums() {
@@ -251,7 +242,8 @@ class typeracerController extends Controller
     }
 
     public function viewLeaderboard() {
-        return view('Leaderboard');
+        $plays = leaderboard::all();
+        return view('Leaderboard', ['plays' => $plays]);
     }
 
 

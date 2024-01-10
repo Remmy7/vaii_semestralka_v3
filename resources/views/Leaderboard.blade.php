@@ -26,26 +26,21 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
+                <th scope="col">Text Name</th>
                 <th scope="col">Rank</th>
                 <th scope="col">Username</th>
-                <th scope="col">WPM</th>
-                <th scope="col">Games played</th>
+                <th scope="col">Time</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="col">1</th>
-                <th scope="col">Reimu</th>
-                <th scope="col">240</th>
-                <th scope="col">364852</th>
-            </tr>
-            <tr>
-                <th scope="col">2</th>
-                <th scope="col">Hakurei</th>
-                <th scope="col">239</th>
-                <th scope="col">128489</th>
-            </tr>
-
+            @foreach($plays as $play)
+                <tr>
+                    <th scope="col">{{$play->gameTextID}}</th>
+                    <th scope="col">{{$play->id}}</th>
+                    <th scope="col">{{$play->playerID}}</th>
+                    <th scope="col">{{$play->time}}</th>
+                </tr>
+            @endforeach
         </table>
     </div>
     <footer class="fixed-bottom">

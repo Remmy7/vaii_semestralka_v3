@@ -70,6 +70,12 @@
                 </div>
             @endif
         @endif
+            <div class="col-6 col-md-3 text-center">
+                <form method="post" action="{{ route('viewLeaderboard') }}" accept-charset="UTF-8">
+                    {{ csrf_field() }}
+                    <button class="btn btn-primary w-100 leaderboardMenuButton">Leaderboard</button>
+                </form>
+            </div>
 
 
     </div>
