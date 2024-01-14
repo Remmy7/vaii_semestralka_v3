@@ -25,10 +25,29 @@
     <div class="center-page">
         <div class="row g-2">
             <div class="col-6 col-md-3 text-center" style="margin-top: 5%">
-                <form method="post" action="{{ route('userLogout') }}" accept-charset="UTF-8">
-                    {{ csrf_field() }}
-                    <button class="btn btn-primary w-100">Logout</button>
-                </form>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Logout
+                </button>
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you certain you want to log out?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay logged in</button>
+                            <form method="post" action="{{ route('userLogout') }}" accept-charset="UTF-8">
+                                {{ csrf_field() }}
+                                <button class="btn btn-danger w-100">Logout</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row g-2 adminMenu" style="margin-top: 5%; width:100%" >
@@ -41,10 +60,30 @@
         </div>
         <div class="row g-2">
             <div class="col-6 col-md-3 text-center" style="margin-top: 5%">
-                <form method="post" action="{{ route('deleteUser') }}" accept-charset="UTF-8">
-                    {{ csrf_field() }}
-                    <button class="btn btn-warning w-100">delete user</button>
-                </form>
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                    delete user
+                </button>
+                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you certain you want to log out?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Do not delete user</button>
+                                <form method="post" action="{{ route('deleteUser') }}" accept-charset="UTF-8">
+                                    {{ csrf_field() }}
+                                    <button class="btn btn-danger w-100">delete user</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
