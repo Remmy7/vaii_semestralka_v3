@@ -33,12 +33,13 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($plays as $play)
+
+            @foreach($sortedPlays as $play)
                 <tr>
-                    <th scope="col">{{$play->gameTextID}}</th>
-                    <th scope="col">{{$play->id}}</th>
-                    <th scope="col">{{$play->playerID}}</th>
-                    <th scope="col">{{$play->time}}</th>
+                    <th scope='col'>{{$play['gameText']}}</th>
+                    <th scope='col'>{{$play['counter']}}</th>
+                    <th scope='col'>{{$play['username']}}</th>
+                    <th scope='col'>{{$play['time']}}</th>
                 </tr>
             @endforeach
         </table>

@@ -19,4 +19,9 @@ class game_texts extends Model
         return $this->belongsTo(difficulty::class, 'difficultiesId');
     }
     use HasFactory;
+
+    public function getName()
+    {
+        return $this->attributes['gameText']; //TODO - zmeniť na reálny názov
+    }
 }
