@@ -22,6 +22,6 @@ class game_texts extends Model
 
     public function getName()
     {
-        return $this->attributes['gameText']; //TODO - zmeniť na reálny názov
+        return $this->attributes['gameText'];
     }
 }

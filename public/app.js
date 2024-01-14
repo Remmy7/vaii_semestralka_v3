@@ -4,6 +4,12 @@ const gameTimer = document.getElementById('gameTimer')
 const gameTextID = document.getElementById('game_text_id');
 
 let charactersTyped = 1;
+
+// skúška na modaly
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+//
 playerTextDisplay.addEventListener('input', () => {
     const displayArray = currentTextDisplay.querySelectorAll('span')
     const playerInputArray = playerTextDisplay.value.split('')
@@ -117,18 +123,18 @@ playerTextDisplay.addEventListener('input', function() {
 //
 
 function validateForm(typeOfForm) {
+    var category = document.getElementById('category').value;
+    var difficulty = document.getElementById('difficulty').value;
+    var texts = document.getElementById('texts').value;
     switch (typeOfForm) {
-        case "addText":
-            var category = document.getElementById('category').value;
-            var difficulty = document.getElementById('difficulty').value;
 
+        case "addText":
             if (category === '--select category--' || difficulty === '--select difficulties--') {
                 alert('Please select valid options for category and difficulty.');
                 return false;
             }
             return true;
         case "deleteText":
-            var texts = document.getElementById('texts').value;
             if (texts === '--search texts--') {
                 alert('Please select valid option for text.');
                 return false;
@@ -136,7 +142,6 @@ function validateForm(typeOfForm) {
             return true;
 
         case "updateCategory":
-            var category = document.getElementById('categoryUpdate').value;
             if (category === '--select category--') {
                 alert('Please select valid options for category');
                 return false;
@@ -144,7 +149,6 @@ function validateForm(typeOfForm) {
             return true;
 
         case "updateDifficulty":
-            var difficulty = document.getElementById('updateDifficulty').value;
             if (difficulty === '--select difficulties--') {
                 alert('Please select valid options for difficulty.');
                 return false;
@@ -152,7 +156,6 @@ function validateForm(typeOfForm) {
             return true;
 
         case "deleteDifficulty":
-            var difficulty = document.getElementById('difficultyDelete').value;
             if (difficulty === '--select difficulties--') {
                 alert('Please select valid options for difficulty.');
                 return false;
@@ -160,7 +163,6 @@ function validateForm(typeOfForm) {
             return true;
 
         case "deleteCategory":
-            var category = document.getElementById('categoryDelete').value;
             if (category === '--select category--') {
                 alert('Please select valid options for category.');
                 return false;

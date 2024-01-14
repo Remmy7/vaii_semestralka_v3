@@ -75,9 +75,6 @@ class typeracerController extends Controller
     {
         \Log::info(json_encode($request->all()));
 
-        //categoriesID and difficultiesID will not be null thanks to javascript
-        //now you just need to check if they are in the database
-
         $request->validate([
             'addText' => 'required',
             'category_id' => 'required|exists:categories,id',
@@ -94,7 +91,9 @@ class typeracerController extends Controller
         $newArticle->save();
 
 
-        return redirect('/viewAdminMenu');
+
+        return response()->json(['success' => true, 'message' => 'Text added successfully']);
+
     }
 
     public function addCategory(Request $request)
