@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('game_texts', function (Blueprint $table) {
+        Schema::create('GameTexts', function (Blueprint $table) {
             $table->id()->startingValue(0);
+            $table->text('textName');
             $table->unsignedBigInteger('categoriesId');
-            $table->foreign(    'categoriesId')->references('id')->on('categories');
+            $table->foreign(    'categoriesId')->references('id')->on('Categories');
             $table->unsignedBigInteger('difficultiesId');
-            $table->foreign('difficultiesId')->references('id')->on('difficulties');
+            $table->foreign('difficultiesId')->references('id')->on('Difficulties');
             $table->string('gameText');
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_texts');
+        Schema::dropIfExists('GameTexts');
     }
 };

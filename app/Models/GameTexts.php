@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class game_texts extends Model
+class GameTexts extends Model
 {
     protected $fillable = ['id','gameText', 'categoriesId', 'difficultiesId'];
+
+    protected $table = 'GameTexts';
 
     public function category()
     {

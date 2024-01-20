@@ -6,7 +6,7 @@ use App\Models\leaderboard;
 use App\Models\User;
 use App\Models\categories;
 use App\Models\difficulty;
-use App\Models\game_texts;
+use App\Models\GameTexts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +32,7 @@ class typeracerController extends Controller
     public function viewAdminMenu()
     {
         $categories = categories::all();
-        $texts = game_texts::all();
+        $texts = GameTexts::all();
         $difficulties = difficulty::all();
         return view('admin', [
             'categories' => $categories,
@@ -42,7 +42,7 @@ class typeracerController extends Controller
 
     public function viewGame()
     {
-        $game_text_random = game_texts::inRandomOrder()->first();
+        $game_text_random = GameTexts::inRandomOrder()->first();
         $game_text_id = $game_text_random->id;
         $game_text = $game_text_random->gameText;
         return view('game', ['game_text' => $game_text,
@@ -53,7 +53,7 @@ class typeracerController extends Controller
     {
 
         $request->validate([
-            'gameTextID' => 'required|exists:game_texts,id',
+            'gameTextID' => 'required|exists:GameTexts,id',
             'time' => 'required|numeric|min:0',
         ]);
 

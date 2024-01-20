@@ -12,7 +12,7 @@ class leaderboard extends Model
 
     public function gameText()
     {
-        return $this->belongsTo(game_texts::class, 'gameTextID');
+        return $this->belongsTo(GameTexts::class, 'gameTextID');
     }
 
     public function player()

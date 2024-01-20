@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('difficulties', function (Blueprint $table) {
+        Schema::create('Difficulties', function (Blueprint $table) {
             $table->id()->startingValue(0);
             $table->string('difficulty')->unique();
             $table->timestamps();
