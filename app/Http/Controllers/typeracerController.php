@@ -79,11 +79,13 @@ class typeracerController extends Controller
             'addText' => 'required',
             'category_id' => 'required|exists:categories,id',
             'difficulty_id' => 'required|exists:difficulties,id',
+            'textName' => 'required',
         ]);
 
 
-        $newArticle = new game_texts();
+        $newArticle = new GameTexts();
         $newArticle->gameText = $request->input('addText');
+        $newArticle->textName = $request->input('textName');
         $newArticle->categoriesId = $request->input('category_id');
         $newArticle->difficultiesId = $request->input('difficulty_id');
 
@@ -152,7 +154,7 @@ class typeracerController extends Controller
         ], [
             'text_id.exists_in_game_texts' => 'Article ID does not exist',
         ]);
-        game_texts::find($request->text_id)->delete($request->text_id);
+        GameTexts::find($request->text_id)->delete($request->text_id);
         return back();
     }
 

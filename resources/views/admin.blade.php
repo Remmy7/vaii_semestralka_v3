@@ -157,14 +157,14 @@
                             </ul>
                         </div>
                     @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
-                    <form method="post" action="{{ route('addText') }}" accept-charset="UTF-8">
+                    <form method="post" action="{{ route('addText') }}" id="createTextForm" accept-charset="UTF-8">
                         {{ csrf_field() }}
-                        <textarea name="addText" class="textAreaForTyperacer" autofocus placeholder="Create new text!" required></textarea>
-                        <div class="row g-2">
-                            <div class="col-6 col-md-3 text-center">
+                        <label style="color: deepskyblue">Name of new text</label>
+                        <textarea name="textName" class="textAreaForAdminInput" style="margin-top: 0" placeholder="Create name of your new text!" required></textarea>
+                        <label style="color: deepskyblue">Body of new text</label>
+                        <textarea name="addText" class="textAreaForTyperacer" style="margin-top: 0" autofocus placeholder="Create new text!" required></textarea>
+                        <div class="row g-2" style="padding-bottom: 5%; padding-top: 5%">
+                            <div class="col-6 text-center">
                                 <select name="category_id" id="category" class="category" required>
                                     <option disabled selected>--select category--</option>
                                     @foreach($categories as $category)
@@ -172,7 +172,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-6 col-md-3 text-center">
+                            <div class="col-6 text-center">
                                 <select name="difficulty_id" id="difficulty" class="difficulty" required>
                                     <option disabled selected>--select difficulties--</option>
                                     @foreach($difficulties as $difficulty)
@@ -181,9 +181,12 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="button" id="saveArticleButton" class="btn btn-primary">Save Article</button>
-                    </form>
-                </div>
+                    <div class="row g-2">
+                        <button type="button" id="saveArticleButton"  class="btn btn-primary" disabled>Save Text</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
