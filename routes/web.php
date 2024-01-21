@@ -26,6 +26,8 @@ Route::post('/saveGame',[typeracerController::class, 'saveGame'])->name('saveGam
 
 Route::post('/testModal',[typeracerController::class, 'testModal'])->name('testModal');
 
+Route::post('/getGameTexts', [typeracerController::class, 'getGameTexts'])->name('getGameTexts');
+
 
 Route::post('addText', [typeracerController::class, 'addText'])->name('addText');
 

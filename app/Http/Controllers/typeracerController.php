@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Nette\Schema\ValidationException;
 use function Laravel\Prompts\password;
 
 
@@ -20,15 +21,38 @@ class typeracerController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('index', ['user' => $user]);
+        $gameTexts = GameTexts::all();
+        $difficulties = difficulty::all();
+        $categories = categories::all();
+        return view('index', ['user' => $user, 'gameTexts'=>$gameTexts,
+            'difficulties'=>$difficulties,
+            'categories'=>$categories]);
     }
 
     public function viewIndex()
     {
         $user = auth()->user();
-        return view('index', ['user' => $user]);
+        $gameTexts = GameTexts::all();
+        $difficulties = difficulty::all();
+        $categories = categories::all();
+        return view('index', ['user' => $user,
+            'gameTexts'=>$gameTexts,
+            'difficulties'=>$difficulties,
+            'categories'=>$categories]);
     }
 
+    public function getGameTexts(Request $request)
+    {
+        $difficultyID = $request->input('difficultyID');
+        $categoryID = $request->input('categoryID');
+
+        $gameTexts = GameTexts::where('difficultiesId', $difficultyID)
+            ->where('categoriesId', $categoryID)
+            ->get(['id', 'textName', 'gameText']);
+
+        // Return the data in JSON format
+        return response()->json($gameTexts);
+    }
     public function viewAdminMenu()
     {
         $categories = categories::all();
@@ -40,13 +64,22 @@ class typeracerController extends Controller
             'difficulties' => $difficulties]);
     }
 
-    public function viewGame()
+    public function viewGame(Request $request)
     {
-        $game_text_random = GameTexts::inRandomOrder()->first();
-        $game_text_id = $game_text_random->id;
-        $game_text = $game_text_random->gameText;
-        return view('game', ['game_text' => $game_text,
-            'game_text_id' => $game_text_id]);
+        $request->validate([
+            'gameTextID' => 'required|numeric|exists:gameTexts,id',
+        ]);
+        $game_texts = GameTexts::all();
+        //$game_text_random = GameTexts::inRandomOrder()->first();
+        //$game_text_id = $game_text_random->id;
+        //$game_text = $game_text_random->gameText;
+        $gameTextID = $request->input('gameTextID');
+        $game_texts_id = GameTexts::find($gameTextID);
+        $game_text = $game_texts_id->gameText;
+
+        return view('game', ['game_texts' => $game_texts,
+            'gameTextId' => $game_texts_id->id,
+            'gameText' => $game_text]);
     }
 
     public function saveGame(Request $request)
@@ -215,11 +248,23 @@ class typeracerController extends Controller
     {
         \Log::info(json_encode($request->all()));
 
-        if ($request->inputPassword == $request->repeatPassword) {
+        try {
             $request->validate([
-                'inputUsername' => 'required',
-                'inputEmail' => 'required|email',
-                'inputPassword' => 'required|min:6',
+                'inputUsername' => 'required|unique:users,name',
+                'inputEmail' => 'required|email|unique:users,email',
+                'inputPassword' => 'required|min:6|confirmed',
+            ], [
+                'inputUsername' => 'name',
+                'inputEmail' => 'email',
+                'inputPassword' => 'password',
+                'inputUsername.required' => 'Username is required.',
+                'inputUsername.unique' => 'Username is not unique.',
+                'inputEmail.required' => 'Email is required.',
+                'inputEmail.email' => 'Email must be a valid email address.',
+                'inputEmail.unique' => 'Email is not unique.',
+                'inputPassword.required' => 'Password is required.',
+                'inputPassword.min' => 'Password must be at least :min characters.',
+                'inputPassword.confirmed' => 'Passwords do not match.',
             ]);
 
 
@@ -230,9 +275,11 @@ class typeracerController extends Controller
             $newUser->privilege = 1;
             $newUser->save();
 
-            return redirect('/');
+            return redirect('/')->with('message', 'Succesfully registered!');
         }
-        return back();
+        catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        }
     }
 
     public function deleteUser(Request $request)
@@ -267,18 +314,26 @@ class typeracerController extends Controller
     public function viewLeaderboard()
     {
         $plays = leaderboard::with('gameText', 'player')->get();
-
+        $difficulties = difficulty::all();
+        $categories = categories::all();
         $plays = $plays->sortBy(function ($play) {
             return $play->gameTextID * 1000 + $play->time;
         });
         $counter = 0;
         $prevGameTextID = null;
 
-        $sortedPlays = $plays->map(function ($play) use (&$counter, &$prevGameTextID) {
+        $sortedPlays = $plays->map(function ($play) use ($categories ,$difficulties, &$counter, &$prevGameTextID) {
             if ($prevGameTextID !== $play->gameTextID) {
                 $counter = 0;
                 $prevGameTextID = $play->gameTextID;
             }
+
+            $gameText = $play->gameText;
+            $difficultyId = $gameText->difficultiesId;
+            $categoryId = $gameText->categoriesId;
+
+            $difficulty = $difficulties->find($difficultyId)->difficulty;
+            $category = $categories->find($categoryId)->categoryTitle;
             $counter++;
             return [
                 'gameTextID' => $play->gameTextID,
@@ -287,10 +342,12 @@ class typeracerController extends Controller
                 'time' => $play->time,
                 'gameText' => $play->gameText->textName,
                 'username' => optional($play->player)->name,
+                'difficulty' => $difficulty,
+                'category' => $category,
             ];
         });
 
-        return view('Leaderboard', compact('sortedPlays'));
+        return view('Leaderboard', ['sortedPlays' => $sortedPlays, 'difficulties' => $difficulties, 'categories' => $categories]);
     }
 
     public function testModal()

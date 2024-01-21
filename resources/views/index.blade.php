@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>TyperacerTheGame</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -38,31 +39,54 @@
             </div>
             <div class="col-6 col-md-3 text-center">
                 <button class="btn btn-primary w-100 playGameButton" data-bs-toggle="modal" data-bs-target="#choose_text">Play</button>
-                <div class="modal fade" id="choose_text" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Choose your text</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="gameForm" method="post" action="{{ route('viewGame') }}" accept-charset="UTF-8">
-                                    {{ csrf_field() }}
-                                    <!-- Make sure you have an input field with the name "gameTextID" -->
-                                    <input type="hidden" name="gameTextID" id="gameTextIDInput" value="">
-
-                                    <div class="btn-group row g-2" role="group" id="gameTextID">
-                                        @foreach($gameTexts as $gameText)
-                                            <button type="button" class="btn btn-primary game-button" data-value="{{ $gameText->textName }}" data-id="{{$gameText->id}}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 20%;">
-                                                {{ Str::limit($gameText->textName, 40) }}
-                                            </button>
-                                        @endforeach
-                                    </div>
-                                </form>
+                <form id="gameForm" method="post" action="{{ route('viewGame') }}" accept-charset="UTF-8">
+                    {{ csrf_field() }}
+                    <div class="modal fade" id="choose_text" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Choose your text</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                        <input type="hidden" name="gameTextID" id="gameTextIDInput" value="">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="difficultySelect" class="form-label">Difficulty</label>
+                                                <select class="form-select" id="difficultySelect" name="difficultyID" required>
+                                                    <option value="" selected disabled>Select Difficulty</option>
+                                                    @foreach($difficulties as $difficulty)
+                                                        <option value="{{ $difficulty->id }}">{{ $difficulty->difficulty }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="categorySelect" class="form-label">Category</label>
+                                                <select class="form-select" id="categorySelect" name="categoryID" required>
+                                                    <option value="" selected disabled>Select Category</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->categoryTitle }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="gameTextSelect" class="form-label">Game Text</label>
+                                                <select class="form-select"  id="gameTextSelect" name="gameTextID" required>
+                                                    <option value="" style="max-width: 70%" selected disabled>Select Game Text</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Text preview</h1>
+                                    <div id="textPreview" class="col-12 col-md-9 col-xl-5 mainPageText"></div>
+                                    <button type="submit" id="chooseGameButton"  class="btn btn-primary">Play!</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         @else
             <div class="row g-2">

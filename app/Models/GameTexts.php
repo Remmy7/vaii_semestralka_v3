@@ -11,12 +11,16 @@ class GameTexts extends Model
 
     protected $table = 'GameTexts';
 
+    public function leaderboard()
+    {
+        return $this->hasOne(Leaderboard::class, 'gameTextID');
+    }
     public function category()
     {
         return $this->belongsTo(categories::class, 'categoriesId');
     }
 
-    public function difficulty()
+    public function difficulties()
     {
         return $this->belongsTo(difficulty::class, 'difficultiesId');
     }

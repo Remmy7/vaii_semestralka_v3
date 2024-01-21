@@ -103,33 +103,34 @@
     background-color: cornflowerblue;
 }
 div#pozadieHlavnaStranka {
-    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+
 }
 div#pozadieLogin {
-    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 div#pozadieLeaderboard {
-    background: url("https://img.freepik.com/free-photo/close-up-spiral-notepad-coffee-cup-earphone-keyboard-gray-background_23-2148052615.jpg?size=626&ext=jpg");
+    background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 div#pozadieForums {
-    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 div#pozadieRegister {
-    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 div#pozadieSettings {
-    background: url("https://img.freepik.com/free-vector/abstract-business-professional-background-banner-design-multipurpose_1340-16858.jpg?w=1380&t=st=1668768777~exp=1668769377~hmac=5f9784a6a3ccd88e747435adb09b96f1c0da5faced50db3be022d034a2183bdf");
+    background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -153,6 +154,19 @@ div#pozadieSettings {
     position: relative;
     height: 100%;
     bottom: 5px;
+}
+.table-responsive-md {
+    margin-top: 20px;
+}
+.table {
+    background-color: #ffffff;
+}
+th, td {
+    text-align: center;
+}
+
+.form-control {
+    width: 100%;
 }
 .mb-1 {
     color: #ffffff;

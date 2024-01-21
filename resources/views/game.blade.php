@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('/app.js')}}" defer></script>
+    <script src="{{ asset('/game.js')}}" defer></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
@@ -39,8 +39,8 @@
         <div class="background_game">
             <div class="row">
                 <div class="col-12">
-                    <div class="textAreaForArticle" id="textAreaArticle" style="user-select: none">{{$game_text}}</div>
-                    <input type="hidden" id="game_text_id" value="{{ $game_text_id }}">
+                    <div class="textAreaForArticle" id="textAreaArticle" style="user-select: none">{{$gameText}}</div>
+                    <input type="hidden" id="game_text_id" value="{{ $gameTextId }}">
                 </div>
             </div>
             <div class="row">

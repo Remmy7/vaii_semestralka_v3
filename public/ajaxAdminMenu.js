@@ -52,3 +52,53 @@ document.addEventListener('DOMContentLoaded', function () {
     saveButton.disabled = !allFieldsFilled;
 });
 });
+
+
+function validateForm(typeOfForm) {
+    var category = document.getElementById('category').value;
+    var difficulty = document.getElementById('difficulty').value;
+    var texts = document.getElementById('texts').value;
+    switch (typeOfForm) {
+
+        case "addText":
+            if (category === '--select category--' || difficulty === '--select difficulties--') {
+                alert('Please select valid options for category and difficulty.');
+                return false;
+            }
+            return true;
+        case "deleteText":
+            if (texts === '--search texts--') {
+                alert('Please select valid option for text.');
+                return false;
+            }
+            return true;
+
+        case "updateCategory":
+            if (category === '--select category--') {
+                alert('Please select valid options for category');
+                return false;
+            }
+            return true;
+
+        case "updateDifficulty":
+            if (difficulty === '--select difficulties--') {
+                alert('Please select valid options for difficulty.');
+                return false;
+            }
+            return true;
+
+        case "deleteDifficulty":
+            if (difficulty === '--select difficulties--') {
+                alert('Please select valid options for difficulty.');
+                return false;
+            }
+            return true;
+
+        case "deleteCategory":
+            if (category === '--select category--') {
+                alert('Please select valid options for category.');
+                return false;
+            }
+            return true;
+    }
+}

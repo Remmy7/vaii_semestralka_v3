@@ -38,11 +38,11 @@
                 <label for="inputPassword" class="form-label">Password</label>
                 <input type="password" class="form-control" id="inputPassword" name="inputPassword" required>
             </div>
-            <input type="submit" value="LOGIN" name="LOGIN" class="btn btn-primary">
+            <input type="submit" value="Login" name="LOGIN" class="btn btn-primary">
         </form>
         <form method="post" action="{{ route('viewRegister') }}" accept-charset="UTF-8">
             {{ csrf_field() }}
-            <button class="btn btn-primary">Do you not have account yet? Click here.</button>
+            <button class="btn btn-primary" style="margin-top: 1%">Do you not have account yet? Click here.</button>
         </form>
     </div>
     <footer class="row fixed-bottom" >
