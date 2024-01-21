@@ -35,9 +35,7 @@ class GameTexts extends Model
 
     public function deleteFromLeaderboard()
     {
-        // Use a database transaction for atomicity
         DB::transaction(function () {
-            // Delete all records from the leaderboard table with the given gameTextID
             leaderboard::where('gameTextID', $this->id)->delete();
         });
     }
