@@ -1,6 +1,6 @@
 //ajax javascript pre pridanie textu
 
-$(document).ready(function () { //TODO
+$(document).ready(function () {
     $('#saveArticleButton').click(function () {
         var url = addTextRoute;
         var formData = {
@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
     categoryField.value.trim() !== '' && categoryField.value.trim() !== "--select categories--" &&
     difficultyField.value.trim() !== '' && difficultyField.value.trim() !== "--select difficulties--";
 
-    // Enable or disable the "Save Text" button based on validation
     saveButton.disabled = !allFieldsFilled;
 });
 });
@@ -58,6 +57,7 @@ function validateForm(typeOfForm) {
     var category = document.getElementById('category').value;
     var difficulty = document.getElementById('difficulty').value;
     var texts = document.getElementById('texts').value;
+    var texts2 = document.getElementById('texts2').value;
     switch (typeOfForm) {
 
         case "addText":
@@ -67,6 +67,12 @@ function validateForm(typeOfForm) {
             }
             return true;
         case "deleteText":
+            if (texts === '--search texts--') {
+                alert('Please select valid option for text.');
+                return false;
+            }
+            return true;
+        case "updateText":
             if (texts === '--search texts--') {
                 alert('Please select valid option for text.');
                 return false;

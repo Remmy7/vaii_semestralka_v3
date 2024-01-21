@@ -41,25 +41,23 @@
             </div>
         @endif
         <div class="adminMenu">
-            <div class="row g-2">
-                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#create_text">
-                    Create new text!
-                </button>
-            </div>
-            <form method="post" action="{{ route('deleteText') }}" accept-charset="UTF-8" onsubmit="return validateForm('deleteText')">
-                @csrf
-                <select name="text_id" id="texts" class="texts" style="width:50%">
-                    <option disabled selected>--search texts--</option>
-                    @foreach($texts as $text)
-                        <option value="{{ $text->id }}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 20%;">
-                            {{ Str::limit($text->gameText, 40) }}
-                        </option>
-                    @endforeach
-                </select>
-                <div class="col-6 col-md-3 text-center" >
-                    <button>delete article</button>
+            <div style="margin:2%">
+                <div class="row g-2">
+                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#create_text">
+                        Create new text!
+                    </button>
                 </div>
-            </form>
+                <div class="row g-2">
+                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#delete_text">
+                        Delete text!
+                    </button>
+                </div>
+                <div class="row g-2">
+                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#update_text">
+                        Update text!
+                    </button>
+                </div>
+            </div>
             <div class="row g-2">
                 <div class="col-6 col-md-3 text-center">
                     <form method="post" action="{{ route('addCategory') }}" accept-charset="UTF-8">
@@ -131,13 +129,10 @@
                         <button class="deleteDifficultyButton" id="delete_difficulty" data-id2="{{ $difficulty->id }}">deleteDifficulty</button>
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
 
-    <!---modals>-->
 
     <div class="modal fade" id="create_text" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -186,9 +181,86 @@
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
                     </div>
                 </form>
-
             </div>
         </div>
+    </div>
+    </div>
+    <div class="modal fade" id="delete_text" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete text</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modalMessage"></div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{ route('deleteText') }}" accept-charset="UTF-8" onsubmit="return validateForm('deleteText')">
+                            @csrf
+                            <select name="text_id" id="texts" class="texts" style="width:50%">
+                                <option disabled selected>--search texts--</option>
+                                @foreach($texts as $text)
+                                    <option value="{{ $text->id }}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 20%;">
+                                        {{ Str::limit($text->textName, 40) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="col-6 col-md-3 text-center" >
+                                <button>delete article</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="modal fade" id="update_text" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Update text</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalMessage"></div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form method="post" action="{{ route('updateText') }}" accept-charset="UTF-8" onsubmit="return validateForm('deleteText')">
+                        @csrf
+                        <select name="text_id2" id="texts" class="texts" style="width:50%">
+                            <option disabled selected>--search texts--</option>
+                            @foreach($texts as $text)
+                                <option value="{{ $text->id }}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 20%;">
+                                    {{ Str::limit($text->textName, 40) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <label style="color: deepskyblue">Body of new text</label>
+                        <textarea name="textBodyUpdate" class="textAreaForAdminInput" style="margin-top: 0" placeholder="Update body of your text!" required></textarea>
+
+                        <div class="col-6 col-md-3 text-center" >
+                            <button>Update article</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
 
     <footer class="row fixed-bottom" >
@@ -196,6 +268,5 @@
         <!--<p><a href="mailto:michalov1@stud.uniza.sk">michalov1@stud.uniza.sk</a></p>-->
     </footer>
 
-</div>
 </body>
 </html>

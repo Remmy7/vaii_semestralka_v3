@@ -115,7 +115,6 @@ playerTextDisplay.addEventListener('input', function() {
     if (!startTime) {
         startTime = new Date();
     }
-    //const charactersTyped = playerTextDisplay.value.length; // TODO remake it so it updates on correct click and every gametick
     const currentTime = new Date();
     const elapsedTime = (currentTime - startTime) / 1000 / 60; // in minutes
 

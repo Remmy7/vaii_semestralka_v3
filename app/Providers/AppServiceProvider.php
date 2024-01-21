@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\categories;
 use App\Models\difficulty;
-use App\Models\game_texts;
+use App\Models\GameTexts;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Custom validation rule for game_texts
         Validator::extend('exists_in_game_texts', function ($attribute, $value, $parameters, $validator) {
-            return game_texts::where('id', $value)->exists();
+            return GameTexts::where('id', $value)->exists();
         });
 
 

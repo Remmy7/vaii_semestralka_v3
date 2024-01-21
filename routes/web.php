@@ -71,6 +71,10 @@ Route::post('/deleteUser', [typeracerController::class, 'deleteUser'])->name('de
 
 Route::post('/settings', [typeracerController::class, 'viewSettings'])->name('viewSettings');
 
+Route::post('/changePassword', [typeracerController::class, 'changePassword'])->name('changePassword');
+
+Route::post('/changeEmail', [typeracerController::class, 'changeEmail'])->name('changeEmail');
+
 Route::post('/saveItem', [typeracerController::class, 'saveItem'])->name('saveItem');
 
 Route::post('/markCompleteRoute/{id}', [typeracerController::class, 'markComplete'])->name('markComplete');
@@ -80,6 +84,8 @@ Route::post('/categories', [typeracerController::class, 'deleteCategory'])->name
 Route::post('/difficulties', [typeracerController::class, 'deleteDifficulty'])->name('deleteDifficulty');
 
 Route::post('/deleteText', [typeracerController::class, 'deleteText'])->name('deleteText');
+
+Route::post('/updateText', [typeracerController::class, 'updateText'])->name('updateText');
 
 Route::post('/updateCategory', [typeracerController::class, 'updateCategory'])->name('updateCategory');
 
@@ -94,6 +100,8 @@ Route::post('/posts', [PostController::class, 'viewPosts'])->name('viewPosts');
 Route::get('/showComments/{post}', [PostController::class, 'showComments'])->name('showComments');
 
 Route::post('/showComments/{post}/comments', [PostController::class, 'createComment'])->name('createComment');
+
+
 
 
 

@@ -50,7 +50,6 @@ class typeracerController extends Controller
             ->where('categoriesId', $categoryID)
             ->get(['id', 'textName', 'gameText']);
 
-        // Return the data in JSON format
         return response()->json($gameTexts);
     }
     public function viewAdminMenu()
@@ -165,7 +164,7 @@ class typeracerController extends Controller
     public function deleteDifficulty(Request $request)
     {
         $request->validate([
-            'difficulty_id_delete' => 'required|exists_in_difficulties:' . $request->input('difficulty_id_delete') //TODO - add check if text matches ID
+            'difficulty_id_delete' => 'required|exists_in_difficulties:' . $request->input('difficulty_id_delete')
         ], [
             'difficulty_id_delete.exists_in_difficulties' => 'Difficulty ID does not exist',
         ]);
@@ -176,7 +175,7 @@ class typeracerController extends Controller
     public function deleteCategory(Request $request)
     {
         $request->validate([
-            'category_id_delete' => 'required|exists_in_categories:' . $request->input('category_id_delete') //TODO - add check if text matches ID
+            'category_id_delete' => 'required|exists_in_categories:' . $request->input('category_id_delete')
         ], [
             'category_id_delete.exists_in_categories' => 'Category ID does not exist',
         ]);
@@ -187,13 +186,34 @@ class typeracerController extends Controller
     public function deleteText(Request $request)
     {
         $request->validate([
-            'text_id' => 'required|exists_in_game_texts:' . $request->input('text_id') //TODO - add check if text matches ID
+            'text_id' => 'required|exists_in_game_texts:' . $request->input('text_id')
         ], [
             'text_id.exists_in_game_texts' => 'Article ID does not exist',
         ]);
-        GameTexts::find($request->text_id)->delete($request->text_id);
+        $gameText = GameTexts::find($request->text_id);
+        $gameText->deleteFromLeaderboard();
+        $gameText->delete($request->text_id);
         return back();
     }
+    public function updateText(Request $request)
+    {
+        try {
+            $request->validate([
+                'text_id2' => 'required|exists_in_game_texts:' . $request->input('text_id2'),
+                'textBodyUpdate' => 'required',
+            ], [
+                'text_id2.exists_in_game_texts' => 'Article ID does not exist',
+            ]);
+            $gameText = GameTexts::find($request->text_id2);
+            $gameText->gameText = $request->input('textBodyUpdate');
+            $gameText->save();
+            return redirect()->back();
+        }
+        catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        }
+    }
+
 
     public function updateCategory(Request $request)
     {
@@ -224,12 +244,10 @@ class typeracerController extends Controller
         $password = $request->inputPassword;
 
         if (Auth::attempt(['name' => $username, 'password' => $password])) {
-            // Authentication passed
             $user = Auth::user();
 
             return redirect('/');
         } else {
-            // Authentication failed
             return back()->with('fail', 'Invalid username or password.');
         }
     }
@@ -309,10 +327,53 @@ class typeracerController extends Controller
 
     public function viewSettings()
     {
-        $userId = session()->get('LoggedUser');
+        $user = auth()->user();
+        //$userId = session()->get('LoggedUser');
 
-        $userData = User::find($userId);
-        return view('Settings', ['userData' => $userData]);
+        //$userData = User::find($userId);
+        return view('Settings', ['userData' => $user]);
+    }
+
+    public function changePassword(Request $request) {
+        try {
+            $request->validate([
+                'inputPassword2' => 'required|min:6',
+            ], [
+                'inputPassword2' => 'password',
+                'inputPassword2.required' => 'Password is required.',
+                'inputPassword2.min' => 'Password must be at least :min characters.',
+            ]);
+
+            $changedUser = auth()->user();
+            $changedUser->password = Hash::make($request->input('inputPassword2'));
+            $changedUser->save();
+
+
+            return redirect('/')->with('message', 'Succesfully changed password!');
+        }
+        catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        }
+    }
+    public function changeEmail(Request $request) {
+        try {
+            $request->validate([
+                'inputEmail' => 'required|email|unique:users,email',
+            ], [
+                'inputEmail.required' => 'Email is required.',
+                'inputEmail.email' => 'Email must be a valid email address.',
+                'inputEmail.unique' => 'Email is not unique.',
+            ]);
+
+            $changedUser = auth()->user();
+            $changedUser->email = $request->input('inputEmail');
+            $changedUser->save();
+
+            return redirect('/')->with('message', 'Succesfully changed email!');
+        }
+        catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        }
     }
 
     public function viewLeaderboard()

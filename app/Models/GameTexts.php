@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class GameTexts extends Model
 {
@@ -29,5 +31,14 @@ class GameTexts extends Model
     public function getName()
     {
         return $this->attributes['gameText'];
+    }
+
+    public function deleteFromLeaderboard()
+    {
+        // Use a database transaction for atomicity
+        DB::transaction(function () {
+            // Delete all records from the leaderboard table with the given gameTextID
+            leaderboard::where('gameTextID', $this->id)->delete();
+        });
     }
 }
