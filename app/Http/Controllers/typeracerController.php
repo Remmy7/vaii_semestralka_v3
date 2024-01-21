@@ -70,6 +70,8 @@ class typeracerController extends Controller
             'gameTextID' => 'required|numeric|exists:gameTexts,id',
         ]);
         $game_texts = GameTexts::all();
+        $difficulties = difficulty::all();
+        $categories = categories::all();
         //$game_text_random = GameTexts::inRandomOrder()->first();
         //$game_text_id = $game_text_random->id;
         //$game_text = $game_text_random->gameText;
@@ -79,7 +81,9 @@ class typeracerController extends Controller
 
         return view('game', ['game_texts' => $game_texts,
             'gameTextId' => $game_texts_id->id,
-            'gameText' => $game_text]);
+            'gameText' => $game_text,
+            'difficulties'=>$difficulties,
+            'categories'=>$categories]);
     }
 
     public function saveGame(Request $request)

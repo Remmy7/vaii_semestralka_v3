@@ -47,7 +47,7 @@
                         {{ $errors->first('inputPassword') }}
                     </div>
                 @endif
-                <input type="password"  class="form-control" id="repeatPassword" name="repeatPassword" required minlength="6">
+                <input type="password"  class="form-control" id="repeatPassword" name="inputPassword_confirmation" required minlength="6">
             </div>
             <div class="mb-1">
                 <label for="email" class="form-label">Email</label>

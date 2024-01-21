@@ -2,6 +2,8 @@ const currentTextDisplay = document.getElementById('textAreaArticle')
 const playerTextDisplay = document.getElementById('textAreaTyperacer')
 const gameTimer = document.getElementById('gameTimer')
 const gameTextID = document.getElementById('game_text_id');
+const resetGameButton = document.getElementById('resetGame');
+
 
 let charactersTyped = 1;
 playerTextDisplay.addEventListener('input', () => {
@@ -37,6 +39,13 @@ playerTextDisplay.addEventListener('input', () => {
         endGame();
     }
 
+})
+
+resetGameButton.addEventListener('click', () => {
+    console.log('Reset game...');
+    clearInterval(gameInterval);
+    resetTimer();
+    setTextGameDisplay();
 })
 
 function endGame() {
@@ -118,3 +127,32 @@ playerTextDisplay.addEventListener('input', function() {
 
 resetTimer()
 setTextGameDisplay()
+
+$(document).ready(function () {
+    $('#difficultySelect, #categorySelect').on('change', function () {
+        var difficultyID = $('#difficultySelect').val();
+        var categoryID = $('#categorySelect').val();
+
+        $.ajax({
+            url: '/getGameTexts',
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            data: {
+                difficultyID: difficultyID,
+                categoryID: categoryID,
+            },
+            success: function (data) {
+                $('#gameTextSelect').empty();
+                $.each(data, function (index, gameText) {
+                    $('#gameTextSelect').append('<option value="' + gameText.id + '" data-gametext="' + gameText.gameText + '">' + gameText.textName + '</option>');
+                });
+            }
+        });
+    });
+    $('#gameTextSelect').on('change', function () {
+        var selectedText = $('#gameTextSelect option:selected').data('gametext');
+        $('#textPreview').text(selectedText);
+    });
+});

@@ -31,13 +31,13 @@ $(document).ready(function () {
             success: function (data) {
                 $('#gameTextSelect').empty();
                 $.each(data, function (index, gameText) {
-                    $('#gameTextSelect').append('<option value="' + gameText.id + '">' + gameText.textName + '</option>');
+                    $('#gameTextSelect').append('<option value="' + gameText.id + '" data-gametext="' + gameText.gameText + '">' + gameText.textName + '</option>');
                 });
             }
         });
     });
     $('#gameTextSelect').on('change', function () {
-        var selectedText = $('#gameTextSelect option:selected').text();
+        var selectedText = $('#gameTextSelect option:selected').data('gametext');
         $('#textPreview').text(selectedText);
     });
 });

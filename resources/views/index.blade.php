@@ -31,14 +31,42 @@
                         <button class="btn btn-primary w-100 settingsMenuButton">Settings</button>
                     </form>
                 </div>
+                <div class="col-6 col-md-3 text-center">
+                    <form method="post" action="{{ route('viewPosts') }}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <button class="btn btn-primary w-100 forumButton">Forum</button>
+                    </form>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <form method="post" action="{{ route('viewLeaderboard') }}" accept-charset="UTF-8">
+                        {{ csrf_field() }}
+                        <button class="btn btn-primary w-100 leaderboardMenuButton">Leaderboard</button>
+                    </form>
+                </div>
+                @if($user->privilege == 4)
+                    <div class="col-6 col-md-3 text-center">
+                        <form method="post" action="{{ route('viewAdminMenu') }}" accept-charset="UTF-8">
+                            {{ csrf_field() }}
+                            <button class="btn btn-primary w-100 adminMenuButton">Admin menu</button>
+                        </form>
+                    </div>
+                @endif
+
             </div>
-            <div class="row">
-                <div class="col-12 col-md-9 col-xl-5 mainPageText">
-                    <p id="textMainPage" >Unleash the Speed of Your Fingertips: Type Faster, Race Harder, and Conquer the Keyboard! Welcome to TypeRacer, where precision meets velocity. Ready, Set, Type!</p>
+
+            <div class="row justify-content-center align-items-center">
+                <div class="row mb-lg-5 mb-md-2"></div>
+                <div class="row mb-lg-5 mb-md-2"></div>
+                <div class="row mb-lg-5 mb-md-2"></div>
+                <div class="row mb-lg-5 mb-md-2"></div>
+
+                <div class="col-12 col-md-9 col-xl-5 text-center">
+                    <label style="font-size: 30px; font-weight: bold; color:navajowhite">Type racer game</label>
+                    <p id="textMainPage" class="mb-5">Unleash the Speed of Your Fingertips: Type Faster, Race Harder, and Conquer the Keyboard! Welcome to TypeRacer, where precision meets velocity.</p>
+                    <button class="btn btn-primary w-100 playGameButton" data-bs-toggle="modal" data-bs-target="#choose_text">Ready, Set, Type!</button>
                 </div>
             </div>
             <div class="col-6 col-md-3 text-center">
-                <button class="btn btn-primary w-100 playGameButton" data-bs-toggle="modal" data-bs-target="#choose_text">Play</button>
                 <form id="gameForm" method="post" action="{{ route('viewGame') }}" accept-charset="UTF-8">
                     {{ csrf_field() }}
                     <div class="modal fade" id="choose_text" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -78,8 +106,8 @@
                                         </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Text preview</h1>
-                                    <div id="textPreview" class="col-12 col-md-9 col-xl-5 mainPageText"></div>
+                                    <h1 class="modal-title fs-5 text-left">Text preview</h1>
+                                    <div id="textPreview" class="col-12 col-md-9 col-xl-5"></div>
                                     <button type="submit" id="chooseGameButton"  class="btn btn-primary">Play!</button>
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
                                 </div>
@@ -102,30 +130,19 @@
                         <button class="btn btn-primary w-100 registerButton">Register</button>
                     </form>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-9 col-xl-5 mainPageText">
-                    <p id="textMainPage" >Unleash the Speed of Your Fingertips: Type Faster, Race Harder, and Conquer the Keyboard! Welcome to TypeRacer, where precision meets velocity. Ready, Set, Type!</p>
-                </div>
-            </div>
-
-        @endif
-        @if(auth()->check())
-            @if($user->privilege == 4)
                 <div class="col-6 col-md-3 text-center">
-                    <form method="post" action="{{ route('viewAdminMenu') }}" accept-charset="UTF-8">
+                    <form method="post" action="{{ route('viewLeaderboard') }}" accept-charset="UTF-8">
                         {{ csrf_field() }}
-                        <button class="btn btn-primary w-100 adminMenuButton">Admin menu</button>
+                        <button class="btn btn-primary w-100 leaderboardMenuButton">Leaderboard</button>
                     </form>
                 </div>
-            @endif
-        @endif
-            <div class="col-6 col-md-3 text-center">
-                <form method="post" action="{{ route('viewLeaderboard') }}" accept-charset="UTF-8">
-                    {{ csrf_field() }}
-                    <button class="btn btn-primary w-100 leaderboardMenuButton">Leaderboard</button>
-                </form>
             </div>
+            <div class="row mb-5"></div>
+            <div class="col-12 col-md-9 col-xl-5 text-center">
+                <label style="font-size: 30px; font-weight: bold; color:navajowhite">Type racer game</label>
+                <p id="textMainPage" class="mb-5">Unleash the Speed of Your Fingertips: Type Faster, Race Harder, and Conquer the Keyboard! Welcome to TypeRacer, where precision meets velocity.</p>
+            </div>
+        @endif
     </div>
     @if(session('message'))
         <div class="alert alert-success">

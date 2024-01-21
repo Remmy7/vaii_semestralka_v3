@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\typeracerController;
+use App\Http\Controllers\postController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -83,7 +85,15 @@ Route::post('/updateCategory', [typeracerController::class, 'updateCategory'])->
 
 Route::post('/updateDifficulty', [typeracerController::class, 'updateDifficulty'])->name('updateDifficulty');
 
+Route::post('/createPost', [PostController::class, 'createPost'])->name('createPost');
 
+Route::post('/createComment', [PostController::class, 'createComment'])->name('createComment');
+
+Route::post('/posts', [PostController::class, 'viewPosts'])->name('viewPosts');
+
+Route::get('/showComments/{post}', [PostController::class, 'showComments'])->name('showComments');
+
+Route::post('/showComments/{post}/comments', [PostController::class, 'createComment'])->name('createComment');
 
 
 

@@ -26,45 +26,44 @@
     </div>
     <div class="table-responsive-md table-fixed">
         <table class="table table-striped table-hover">
-            <tr>
-                <th scope="col">Rank</th>
-                <th scope="col">Text Name</th>
-                <th scope="col">Difficulty</th>
-                <th scope="col">Category</th>
-                <th scope="col">Username</th>
-                <th scope="col">Time</th>
-            </tr>
-            <tr>
-                <th scope="col">
-                </th>
-                <th scope="col">
-                    <input type="text" class="form-control" id="searchText" placeholder="Search Text">
-                </th>
-                <th scope="col">
-                    <input type="text" class="form-control" id="searchDifficulty" placeholder="Search Difficulty">
-                </th>
-                <th scope="col">
-                    <input type="text" class="form-control" id="searchCategory" placeholder="Search Category">
-                </th>
-                <th scope="col">
-                    <input type="text" class="form-control" id="searchUsername" placeholder="Search Username">
-                </th>
-                <th scope="col">
-                </th>
-
-            </tr>
-            <tbody>
-
-            @foreach($sortedPlays as $play)
-                <tr class = "leaderboard-row">
-                    <th scope='col'>{{$play['counter']}}</th>
-                    <th scope='col'>{{$play['gameText']}}</th>
-                    <th scope='col'>{{$play['difficulty']}}</th>
-                    <th scope='col'>{{$play['category']}}</th>
-                    <th scope='col'>{{$play['username']}}</th>
-                    <th scope='col'>{{$play['time']}}</th>
+            <thead>
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Text Name</th>
+                    <th scope="col">Difficulty</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Time</th>
                 </tr>
-            @endforeach
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">
+                        <input type="text" class="form-control" id="searchText" placeholder="Search Text">
+                    </th>
+                    <th scope="col">
+                        <input type="text" class="form-control" id="searchDifficulty" placeholder="Search Difficulty">
+                    </th>
+                    <th scope="col">
+                        <input type="text" class="form-control" id="searchCategory" placeholder="Search Category">
+                    </th>
+                    <th scope="col">
+                        <input type="text" class="form-control" id="searchUsername" placeholder="Search Username">
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($sortedPlays as $play)
+                    <tr class = "leaderboard-row">
+                        <th scope='col'>{{$play['counter']}}</th>
+                        <th scope='col'>{{$play['gameText']}}</th>
+                        <th scope='col'>{{$play['difficulty']}}</th>
+                        <th scope='col'>{{$play['category']}}</th>
+                        <th scope='col'>{{$play['username']}}</th>
+                        <th scope='col'>{{$play['time']}}</th>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
     <footer class="fixed-bottom">

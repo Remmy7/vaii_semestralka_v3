@@ -42,7 +42,7 @@
 .background_game {
     font-size: 20px;
     padding: 20px;
-    background-color: greenyellow;
+    background-color: #74889F;
 }
 
 .adminMenu {
@@ -51,7 +51,7 @@
     background-color: orange;
 }
 .textAreaForArticle {
-    background-color: #6076da;
+    background-color: white;
 }
 .textAreaForTyperacer {
     width: 100%;
@@ -69,6 +69,7 @@
 .backgroundDefaultFullscreen {
     width: 100%;
     height: 100vh;
+    overflow-y: auto";
 }
 .mainPageText {
     margin-top: 2%;
@@ -76,16 +77,21 @@
 
 .adminMenuButton {
     margin-top: 2%;
-    background-color: darkred;
+    background-color: #03203A;
 }
 
 .settingsMenuButton {
     margin-top: 2%;
-    background-color: grey;
+    background-color: #03203A;
+}
+
+.forumButton {
+    margin-top: 2%;
+    background-color: #03203A;
 }
 .leaderboardMenuButton{
     margin-top: 2%;
-    background-color: lightcoral;
+    background-color: #03203A;
 }
 
 .playGameButton {
@@ -95,12 +101,12 @@
 
 .loginButton {
     margin-top: 2%;
-    background-color: cornflowerblue;
+    background-color: #03203A;
 }
 
 .registerButton {
     margin-top: 2%;
-    background-color: cornflowerblue;
+    background-color: #03203A;
 }
 div#pozadieHlavnaStranka {
     background: url("https://images-ext-1.discordapp.net/external/2fxM37vtOw3yy3WthU0a3ea7ki-i9ftfDKovCMPQhYg/%3Fw%3D996%26t%3Dst%3D1705768366~exp%3D1705768966~hmac%3Deca50acb7d75bd119aaef2e57b3ae009c922ca6eae359535bc5f677f0518c789/https/img.freepik.com/free-vector/abstract-classic-blue-background_23-2148433954.jpg");
@@ -181,24 +187,22 @@ th, td {
     font-weight: bold;
 }
 
-th:first-child {
-    color:red;
-}
-tbody tr:first-child {
-    background-color: gold;
-}
-tbody tr:nth-child(2) {
-    background-color: silver;
-}
-tbody tr:nth-child(3) {
-    background-color: #cd7f32;
+.table-fixed thead {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 1);
+    z-index: 1;
 }
 
-#textMainPage {
+.table-fixed th {
     font-weight: bold;
-    color: #050100;
-    font-size: 30px;
-    background: lightblue;
+}
+
+
+#textMainPage {
+    color: #FFBE0B;
+    font-size: 20px;
+    background: none;
     opacity: 0.9;
 }
 .content {
@@ -208,7 +212,7 @@ tbody tr:nth-child(3) {
 footer {
     background: lightblue;
     position: relative;
-    width: 100%;
+    width: 110%;
     font-size: 15px;
 }
 
@@ -218,7 +222,7 @@ footer {
 }
 
 .correctLetter {
-    color: chartreuse;
+    color: #FFBE0B;
 }
 
 .incorrectLetter {
